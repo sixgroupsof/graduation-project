@@ -35,47 +35,45 @@ class PerfectInformationController extends Controller
      */
     public function save(Request $request)
     {
-        $user=$this->user;
-        $query =user::where('email','=',$user->email)->firstOrFail();
+        $user = $this->user;
+        $query = user::where('email', '=', $user->email)->firstOrFail();
 
-        if($request->isMethod('POST'))
-        {
+        if ($request->isMethod('POST')) {
 
-            $file=$request->file('imgUrl');
-            if($file->isValid())// 文件是否上传成功
+            $file = $request->file('imgUrl');
+            if ($file->isValid())// 文件是否上传成功
             {
                 // $oldFileName->getClientOriginalName();// 原文件名??5.6失效
-                
+
                 $ext = $file->getClientOriginalExtension();// 扩展名
-                
+
                 // $file->getClientMimeType();// MimeType
-      
+
                 $realPath = $file->getRealPath();// 临时绝对路径
 
-                $newFileName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' .$ext;
-                
-                Storage::disk('uploads')->put($newFileName,file_get_contents($realPath));
+                $newFileName = date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
 
-                $query->imgUrl= 'storage/app/uploads/' . $newFileName;
-                
+                Storage::disk('uploads')->put($newFileName, file_get_contents($realPath));
+
+                $query->imgUrl = 'storage/app/uploads/' . $newFileName;
+
             }
 
-            if($query!=null)
-            {
-                $data=$request->input('user');
-              
+            if ($query != null) {
+                $data = $request->input('user');
+
                 $query->description = $data['description'];
                 $query->save();
-                return view('user',[
-                    'user'=>$query
+                return view('user', [
+                    'user' => $query
                 ]);
             }
         }
 
-        return view('perfectInformation',[
-            'user'=>$query
+        return view('perfectInformation', [
+            'user' => $query
         ]);
-       
-       
+
+
     }
 }

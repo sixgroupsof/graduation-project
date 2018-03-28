@@ -22,3 +22,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user', 'UserController@index')->name('user');
 
 Route::any('/perfectInformation', 'PerfectInformationController@save')->name('perfectInformation');
+
+Route::any('create', 'CreateController@index')->name('create');
+
+Route::any('/create/save', 'CreateController@save')->name('save');
+
+
+

@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Home
+                    嚢囊
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -37,12 +37,21 @@
                             <li><a class="nav-link" href="{{ route('login') }}">登录</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">注册</a></li>
                         @else
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item dropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a href="{{ route('create') }}">写日记</a>
+                                </li>
+                            </ul>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('create') }}">
+                                        我的日记本
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('user') }}">
                                         个人信息
                                     </a>
